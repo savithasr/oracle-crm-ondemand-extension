@@ -137,6 +137,12 @@ var pluginsDefinitions = [
         requiresLogin: true
     },
     {
+        name: 'Copy Previous Objective',
+        invokeOnPattern: /AccountCallInsert/ig,
+        handler: copyPreviousObjectiveHandler,
+        requiresLogin: true
+    },
+    {
         name: 'Augment Call Details Entry',
         invokeOnPattern: /ContactCallDetail/ig,
         handler: augmentCallDetailsEntry,
