@@ -69,6 +69,53 @@ var copyPreviousObjectiveHandler = function() {
     
 };
 
+var copyAccountPreviousObjectiveHandler = function() {
+var ownerId = $get('AccountCallInsert.Owner Id').val();
+var contactPerId = $get('AccountCallInsert.Contact Per Id').val();
+var $objectiveInputElement = $get('AccountCallInsert.VONDMED Call');
+var objectiveValue = $objectiveInputElement.val();
+// already has a value so don't overwrite
+if (objectiveValue !== '') { return; }
+var obj = {ownerId: ownerId, contactPerId: contactPerId, objectiveValue: objectiveValue};
+console.dir(obj);
+var fields = {
+ActivityId: '',
+PrimaryContactId: " ='" + contactPerId + "' ",
+PrimaryContactLastName: '',
+PrimaryContactFirstName: '',
+Owner: '',
+AccountId: '',
+CallType: '',
+PrimaryContact: '',
+CreatedBy: '',
+Location: '',
+Objective: '',
+OwnerId: " ='" + ownerId + "' ",
+Status: '',
+Type: '',
+ActivitySubType: '',
+CreatedDate: '',
+ModifiedDate: '',
+Date: '',
+StartTime: '',
+EndTime: ''
+};
+odlib.activityQuery(fields, function(data) {
+// no previous activities on contact
+if (data.length === 0) {
+return;
+}
+data.sort(function(item1, item2) {
+return Date.parse(item1.StartTime) - Date.parse(item2.StartTime);
+});
+var lastObjectiveValue = data[data.length - 1].Objective;
+$objectiveInputElement.val(lastObjectiveValue);
+console.dir(data); 
+});
+};
+
+
+
 var augmentCallDetailsEntry = function() {
 	var row =  "<tr width='100%'>";
 	row += "<td>Product: <select><option></option><option>Singulair</option><option>Hyzaar</option></td>";
@@ -130,24 +177,24 @@ PluginManager.prototype.applyPlugins = function() {
 // Plugin Definitions
 //***************************************************************************
 var pluginsDefinitions = [
-    {
-        name: 'Copy Previous Objective',
-        invokeOnPattern: /ContactCallInsert/ig,
-        handler: copyPreviousObjectiveHandler,
-        requiresLogin: true
-    },
-    {
-        name: 'Copy Previous Objective',
-        invokeOnPattern: /AccountCallInsert/ig,
-        handler: copyPreviousObjectiveHandler,
-        requiresLogin: true
-    },
-    {
-        name: 'Augment Call Details Entry',
-        invokeOnPattern: /ContactCallDetail/ig,
-        handler: augmentCallDetailsEntry,
-        requiresLogin: false
-    }
+{
+name: 'Copy Previous Objective',
+invokeOnPattern: /ContactCallInsert/ig,
+handler: copyPreviousObjectiveHandler,
+requiresLogin: true
+},
+{
+name: 'Copy Previous Objective',
+invokeOnPattern: /AccountCallInsert/ig,
+handler: copyAccountPreviousObjectiveHandler ,
+requiresLogin: true
+},
+{
+name: 'Augment Call Details Entry',
+invokeOnPattern: /ContactCallDetail/ig,
+handler: augmentCallDetailsEntry,
+requiresLogin: false
+}
 ];
 
 //***************************************************************************
