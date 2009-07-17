@@ -70,49 +70,94 @@ var copyPreviousObjectiveHandler = function() {
 };
 
 var copyAccountPreviousObjectiveHandler = function() {
-var ownerId = $get('AccountCallInsert.Owner Id').val();
-var contactPerId = $get('AccountCallInsert.Contact Per Id').val();
-var $objectiveInputElement = $get('AccountCallInsert.VONDMED Call');
-var objectiveValue = $objectiveInputElement.val();
+
+var ownerIdAcc = $get('AccountCallInsert.Owner Id').val();
+
+var contactPerIdAcc = $get('AccountCallInsert.Contact Per Id').val();
+
+var $objectiveInputElementAcc = $get('AccountCallInsert.VONDMED Call');
+
+var objectiveValueAcc = $objectiveInputElement.val();
+
 // already has a value so don't overwrite
-if (objectiveValue !== '') { return; }
-var obj = {ownerId: ownerId, contactPerId: contactPerId, objectiveValue: objectiveValue};
-console.dir(obj);
-var fields = {
+
+if (objectiveValueAcc !== '') { return; }
+
+var objAcc = {ownerIdAcc: ownerIdAcc, contactPerIdAcc: contactPerIdAcc, objectiveValueAcc: objectiveValueAcc};
+
+console.dir(objAcc);
+
+var fieldsAcc = {
+
 ActivityId: '',
+
 PrimaryContactId: " ='" + contactPerId + "' ",
+
 PrimaryContactLastName: '',
+
 PrimaryContactFirstName: '',
+
 Owner: '',
+
 AccountId: '',
+
 CallType: '',
+
 PrimaryContact: '',
+
 CreatedBy: '',
+
 Location: '',
+
 Objective: '',
+
 OwnerId: " ='" + ownerId + "' ",
+
 Status: '',
+
 Type: '',
+
 ActivitySubType: '',
+
 CreatedDate: '',
+
 ModifiedDate: '',
+
 Date: '',
+
 StartTime: '',
+
 EndTime: ''
+
 };
-odlib.activityQuery(fields, function(data) {
+
+odlib.activityQuery(fieldsAcc, function(data) {
+
 // no previous activities on contact
+
 if (data.length === 0) {
+
 return;
+
 }
+
 data.sort(function(item1, item2) {
+
 return Date.parse(item1.StartTime) - Date.parse(item2.StartTime);
+
 });
-var lastObjectiveValue = data[data.length - 1].Objective;
-$objectiveInputElement.val(lastObjectiveValue);
+
+var lastObjectiveValueAcc = data[data.length - 1].Objective;
+
+$objectiveInputElement.val(lastObjectiveValueAcc);
+
 console.dir(data); 
+
 });
+
 };
+
+
 
 
 
