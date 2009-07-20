@@ -2,7 +2,7 @@
 
     // used to prevent browser caching of .js file with main application logic --check
     var randomNumber = Math.floor( Math.random() * 999999 );
-
+alert("Path : " );
     // URL builder helper
     function appURL(relativePath) {
       var basePath = 'http://github.com/savithasr/oracle-crm-ondemand-extension/tree/apps';
