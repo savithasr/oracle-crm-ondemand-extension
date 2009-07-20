@@ -16,9 +16,9 @@ function $get(key) {
 // Plugin Handlers
 //***************************************************************************
 var copyPreviousObjectiveHandler = function() {
-        var ownerId = $get('AccountCallInsert.Owner Id').val();
-        var contactPerId = $get('AccountCallInsert.Contact Per Id').val();
-        var $objectiveInputElement = $get('AccountCallInsert.VONDMED Call');
+        var ownerId = $get('ContactCallInsert.Owner Id').val();
+        var contactPerId = $get('ContactCallInsert.Contact Per Id').val();
+        var $objectiveInputElement = $get('ContactCallInsert.VONDMED Call');
         var objectiveValue = $objectiveInputElement.val();
         
         // already has a value so don't overwrite
@@ -132,7 +132,7 @@ PluginManager.prototype.applyPlugins = function() {
 var pluginsDefinitions = [
     {
         name: 'Copy Previous Objective',
-        invokeOnPattern: /AccountCallInsert/ig,
+        invokeOnPattern: /ContactCallInsert/ig,
         handler: copyPreviousObjectiveHandler,
         requiresLogin: true
     },
