@@ -1,6 +1,6 @@
 (function() {
 
-    // used to prevent browser caching of .js file with main application logic
+    // used to prevent browser caching of .js file with main application logic --check
     var randomNumber = Math.floor( Math.random() * 999999 );
 
     // URL builder helper

@@ -3,12 +3,12 @@
 function OnDemandLib() {}
 
 OnDemandLib.prototype.admin = {
-    userName: 'MERCKTEST_CTE01/pfeil',
-    password: 'method00'
+    userName: 'MERCKTEST_CTE01/Bischofe',
+    password: 'Accenture55'
 };
 
 //
-//  Charles's JavaScript Library for CRM On Demand R16
+//  Charles's JavaScript Library for CRM On Demand R16 --savitha
 //
 //  All the things that are fun to do.
 //
