@@ -5,7 +5,7 @@
 
     // URL builder helper
     function appURL(relativePath) {
-      var basePath = 'http://github.com/savithasr/oracle-crm-ondemand-extension/tree';
+      var basePath = 'http://github.com/savithasr/oracle-crm-ondemand-extension/tree/apps';
       return basePath + relativePath;
     }
     
